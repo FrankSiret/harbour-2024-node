@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        node 'node'
+    }
+
     stages {
         stage('Build and Push') {
             steps {
@@ -13,7 +17,10 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Testing target api'
+                echo 'Testing api'
+                sh 'ls -la'
+                sh 'node -v'
+                sh 'npm -v'
                 sh 'npm test'
             }
         }
