@@ -14,7 +14,7 @@
 
   - name: "Copy binary artifact"
     copy:
-      src: mynodeapp.js
+      src: index.js
       dest: /home/ubuntu/mynodeapp.js
 
   - name: "Make js executable"
