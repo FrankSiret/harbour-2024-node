@@ -53,7 +53,6 @@ pipeline {
                 ansiblePlaybook credentialsId: 'ckey',
                                 inventory: 'inventory.ini',
                                 playbook: 'playbook.yml'
-                }
             }
         }
 
