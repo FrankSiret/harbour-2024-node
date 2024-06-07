@@ -20,19 +20,19 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         echo 'Testing api'
-        //         nodejs(nodeJSInstallationName: 'node-21') {
-        //             sh 'npm config ls'
-        //             sh 'ls -la'
-        //             sh 'node -v'
-        //             sh 'npm -v'
-        //             sh 'npm install'
-        //             sh 'npm test'
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Testing api'
+                nodejs(nodeJSInstallationName: 'node-21') {
+                    sh 'npm config ls'
+                    sh 'ls -la'
+                    sh 'node -v'
+                    sh 'npm -v'
+                    sh 'npm install'
+                    sh 'npm test'
+                }
+            }
+        }
 
         stage('Deploy to target') {
             steps {
