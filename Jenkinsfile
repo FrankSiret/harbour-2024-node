@@ -11,6 +11,13 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                echo 'Testing target api'
+                sh 'npm test'
+            }
+        }
+
         stage('Deploy to target') {
             steps {
                 echo 'Deploying to target'
