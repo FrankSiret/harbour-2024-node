@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to target') {
+        stage('Deploy to Staging (Target)') {
             steps {
                 echo 'Deploying to target'
                 withCredentials([sshUserPrivateKey(credentialsId: 'tkey',
@@ -43,7 +43,10 @@ pipeline {
             }
         }
 
-        stage('Deploy to aws') {
+        stage('Deploy to Production (AWS)') {
+            when {
+                branch 'main'
+            }
             environment {
                 ANSIBLE_HOST_KEY_CHECKING = 'false'
             }
@@ -56,7 +59,10 @@ pipeline {
             }
         }
 
-        stage('Deploy to k8s') {
+        stage('Deploy to Production (K8S)') {
+            when {
+                branch 'main'
+            }
             steps {
                 echo 'Deploying to k8s'
                 withCredentials([sshUserPrivateKey(credentialsId: 'kkey',
