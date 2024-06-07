@@ -4,6 +4,9 @@ Description=My App
 [Service]
 ExecStart=/home/ubuntu/mynodeapp.js
 Type=simple
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ubuntu
 
 [Install]
 WantedBy=multi-user.target
