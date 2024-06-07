@@ -30,7 +30,7 @@
     become: true
 
   - name: "Install dependencies"
-    shell: "npm install --global express"
+    shell: "npm install express"
 
   - name: "Start service"
     ansible.builtin.systemd:
