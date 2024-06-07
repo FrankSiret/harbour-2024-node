@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing api'
-                nodejs(nodeJSInstallationName: 'Node 21.0.0') {
+                nodejs(nodeJSInstallationName: 'node-21') {
                     sh 'npm config ls'
                     sh 'ls -la'
                     sh 'node -v'
