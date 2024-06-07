@@ -1,5 +1,15 @@
 {
+  "name": "hs-package-node",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "mocha ./index.test.js"
+  },
   "dependencies": {
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0",
+    "request": "^2.88.2"
   }
 }
