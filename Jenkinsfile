@@ -43,23 +43,19 @@ pipeline {
             }
         }
 
-        // stage('Deploy to the aws') {
-        //     steps {
-        //         echo 'Deploying to aws'
-        //         withCredentials([sshUserPrivateKey(credentialsId: 'ckey',
-        //                                            keyFileVariable: 'ckey',
-        //                                            usernameVariable: 'myuser')]) {
-        //             sh "ssh ${myuser}@18.199.89.189 -i ${ckey} -o StrictHostKeychecking=no \"docker ps -a\""
+        stage('Deploy to aws') {
+            environment {
+                ANSIBLE_HOST_KEY_CHECKING = 'false'
+            }
+            steps {
+                sh 'echo "Deploying to aws..."'
 
-        //             script {
-        //                 // Stop and remove containers
-        //                 sh "ssh vagrant@18.199.89.189 -i ${ckey} \"docker stop myapp || true && docker rm myapp || true\""
-        //             }
-                    
-        //             sh "ssh vagrant@18.199.89.189 -i ${ckey} \"docker run -d -p 3000:3000 --name myapp ttl.sh/docker-hs-node-frank\""
-        //         }
-        //     }
-        // }
+                ansiblePlaybook credentialsId: 'ckey',
+                                inventory: 'inventory.ini',
+                                playbook: 'playbook.yml'
+                }
+            }
+        }
 
         stage('Deploy to k8s') {
             steps {

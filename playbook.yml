@@ -1,0 +1,37 @@
+- hosts: app
+  tasks:
+
+  - name: "Check service"
+    shell: "if test -f /etc/systemd/system/mynodeapp.service ; then echo true; else echo false; fi"
+    register: service_exists
+
+  - name: "Stop service"
+    ansible.builtin.systemd:
+      name: mynodeapp
+      state: stopped
+    when: service_exists.stdout == "true"
+    become: true
+
+  - name: "Copy binary artifact"
+    copy:
+      src: mynodeapp.js
+      dest: /home/ubuntu/mynodeapp.js
+
+  - name: "Make js executable"
+    file:
+      path: /home/ubuntu/mynodeapp.js
+      mode: "u+x"
+    become: true
+
+  - name: "Copy service"
+    copy:
+      src: mynodeapp.service
+      dest: /etc/systemd/system/mynodeapp.service
+    become: true
+
+  - name: "Start service"
+    ansible.builtin.systemd:
+      name: mynodeapp
+      enabled: yes
+      state: started
+    become: true

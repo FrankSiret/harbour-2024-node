@@ -1,0 +1,9 @@
+[Unit]
+Description=My App
+
+[Service]
+ExecStart=/home/ubuntu/mynodeapp.js
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
