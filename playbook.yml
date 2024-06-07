@@ -29,6 +29,9 @@
       dest: /etc/systemd/system/mynodeapp.service
     become: true
 
+  - name: "Install dependencies"
+    shell: "npm install --global express"
+
   - name: "Start service"
     ansible.builtin.systemd:
       name: mynodeapp

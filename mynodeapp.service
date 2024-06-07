@@ -2,7 +2,7 @@
 Description=My App
 
 [Service]
-ExecStart=/home/ubuntu/mynodeapp.js
+ExecStart=/usr/bin/node /home/ubuntu/mynodeapp.js
 Type=simple
 Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production
