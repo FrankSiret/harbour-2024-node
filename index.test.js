@@ -1,14 +1,27 @@
-const request = require('supertest');
-const { test } = require('node:test');
-const assert = require('assert');
-const app = require('./index');
+const request = require('request');
 
-test('/api should be okay', async (t) => {
-    const response = await request(app).get('/api');
-    assert.strictEqual(response.status, 200);
-});
+describe('Test /api', () => {
 
-test('/api should return message Hello World!', async (t) => {
-    const response = await request(app).get('/api');
-    assert.strictEqual(response.body.message, 'Hello World!');
+    const url = 'http://localhost:3000/api';
+    
+    it('should be okay', () => {
+        request(url, function (error, response, body) {
+            (async () => {
+                const chai = await import('chai');
+                const { expect } = chai;
+                expect(response.statusCode).to.equal(200);
+            })();
+        });
+    });
+
+    it('should return message Hello Wordl!', () => {
+        request(url, function (error, response, body) {
+            (async () => {
+                const chai = await import('chai');
+                const { expect } = chai;
+                expect(body['message']).to.equal('Hello World!');
+            })();
+        });
+    });
+
 });
