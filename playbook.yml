@@ -12,7 +12,7 @@
     when: service_exists.stdout == "true"
     become: true
 
-  - name: "Copy binary artifact"
+  - name: "Copy js file"
     copy:
       src: index.js
       dest: /home/ubuntu/mynodeapp.js
